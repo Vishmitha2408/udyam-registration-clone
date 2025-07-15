@@ -1,0 +1,90 @@
+[
+  {
+    "tag": "input",
+    "name": "__EVENTTARGET",
+    "type": "hidden",
+    "id": "__EVENTTARGET",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "__EVENTARGUMENT",
+    "type": "hidden",
+    "id": "__EVENTARGUMENT",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "__VIEWSTATE",
+    "type": "hidden",
+    "id": "__VIEWSTATE",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "__VIEWSTATEGENERATOR",
+    "type": "hidden",
+    "id": "__VIEWSTATEGENERATOR",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "__VIEWSTATEENCRYPTED",
+    "type": "hidden",
+    "id": "__VIEWSTATEENCRYPTED",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "__EVENTVALIDATION",
+    "type": "hidden",
+    "id": "__EVENTVALIDATION",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "select",
+    "name": "cmbMoreFunction",
+    "type": "text",
+    "id": "cmbMoreFunction",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "ctl00$ContentPlaceHolder1$txtadharno",
+    "type": "text",
+    "id": "ctl00_ContentPlaceHolder1_txtadharno",
+    "label": "",
+    "placeholder": "Your Aadhaar No"
+  },
+  {
+    "tag": "input",
+    "name": "ctl00$ContentPlaceHolder1$txtownername",
+    "type": "text",
+    "id": "ctl00_ContentPlaceHolder1_txtownername",
+    "label": "",
+    "placeholder": "Name as per Aadhaar"
+  },
+  {
+    "tag": "input",
+    "name": "ctl00$ContentPlaceHolder1$chkDecarationA",
+    "type": "checkbox",
+    "id": "ctl00_ContentPlaceHolder1_chkDecarationA",
+    "label": "",
+    "placeholder": ""
+  },
+  {
+    "tag": "input",
+    "name": "ctl00$ContentPlaceHolder1$btnValidateAadhaar",
+    "type": "submit",
+    "id": "ctl00_ContentPlaceHolder1_btnValidateAadhaar",
+    "label": "",
+    "placeholder": ""
+  }
+]

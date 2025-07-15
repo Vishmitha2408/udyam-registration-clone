@@ -1,64 +1,33 @@
-const puppeteer = require("puppeteer");
+const axios = require("axios");
+const cheerio = require("cheerio");
 const fs = require("fs");
 
-(async () => {
-  const browser = await puppeteer.launch({ headless: false }); // use headless: false to debug
-  const page = await browser.newPage();
+async function scrapeUdyamFormFields() {
+  try {
+    const url = "https://udyamregistration.gov.in/UdyamRegistration.aspx";
+    const response = await axios.get(url, {
+      headers: { "User-Agent": "Mozilla/5.0" },
+    });
 
-  await page.goto("https://udyamregistration.gov.in/UdyamRegistration.aspx", {
-    waitUntil: "networkidle0",
-    timeout: 0,
-  });
+    const $ = cheerio.load(response.data);
+    const formFields = [];
 
-  // Wait for iframe to load
-  await page.waitForSelector("iframe");
+    $("input, select, textarea").each((i, elem) => {
+      const tag = $(elem)[0].tagName;
+      const name = $(elem).attr("name") || "";
+      const type = $(elem).attr("type") || "text";
+      const id = $(elem).attr("id") || "";
+      const placeholder = $(elem).attr("placeholder") || "";
+      const label = $(`label[for="${id}"]`).text().trim();
 
-  // Get the iframe element
-  const frameHandle = await page.$("iframe");
-  const frame = await frameHandle.contentFrame();
+      formFields.push({ tag, name, type, id, label, placeholder });
+    });
 
-  // Wait for Aadhaar field inside the iframe
-  await frame.waitForSelector("#ctl00_ContentPlaceHolder1_txtAadhaar");
+    fs.writeFileSync("formSchema.json", JSON.stringify(formFields, null, 2));
+    console.log("✅ Scraped fields saved to formSchema.json");
+  } catch (error) {
+    console.error("❌ Scraping failed:", error.message);
+  }
+}
 
-  // Extract form fields inside the iframe
-  const step1 = await frame.evaluate(() => {
-    return {
-      aadhaar: {
-        label: "Aadhaar Number",
-        type: "text",
-        selector: "#ctl00_ContentPlaceHolder1_txtAadhaar",
-        validation: "^[2-9]{1}[0-9]{11}$"
-      },
-      name: {
-        label: "Name of Entrepreneur",
-        type: "text",
-        selector: "#ctl00_ContentPlaceHolder1_txtName"
-      },
-      otp: {
-        label: "OTP",
-        type: "text",
-        selector: "#ctl00_ContentPlaceHolder1_txtOTP",
-        validation: "^[0-9]{6}$"
-      }
-    };
-  });
-
-  const step2 = {
-    pan: {
-      label: "PAN Number",
-      type: "text",
-      validation: "^[A-Z]{5}[0-9]{4}[A-Z]{1}$"
-    },
-    enterpriseName: {
-      label: "Enterprise Name",
-      type: "text"
-    }
-  };
-
-  const schema = { step1, step2 };
-
-  fs.writeFileSync("udyam_form_schema.json", JSON.stringify(schema, null, 2));
-  console.log("✅ Form schema extracted successfully!");
-
-  await browser.close();
-})();
+scrapeUdyamFormFields();

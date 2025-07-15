@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "puppeteer": "^24.12.1"
-  }
+    "axios": "^1.10.0",
+    "cheerio": "^1.1.0",
+    "puppeteer": "^24.12.1",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-scripts": "^5.0.1"
+  },
+  "description": ""
 }
